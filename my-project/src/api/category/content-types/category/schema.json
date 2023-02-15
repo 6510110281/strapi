@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "books",
+  "collectionName": "categories",
   "info": {
-    "singularName": "book",
-    "pluralName": "books",
-    "displayName": "book"
+    "singularName": "category",
+    "pluralName": "categories",
+    "displayName": "category"
   },
   "options": {
     "draftAndPublish": true
@@ -15,14 +15,11 @@
       "type": "string",
       "required": true
     },
-    "description": {
-      "type": "text"
-    },
-    "categories": {
+    "books": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::category.category",
-      "mappedBy": "books"
+      "target": "api::book.book",
+      "inversedBy": "categories"
     }
   }
 }
