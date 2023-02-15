@@ -32,4 +32,15 @@ export default factories.createCoreController('api::book.book', ({strapi}) => ({
 
         return this.transformResponse(sanitizedEntity);
     },
+
+    async like(ctx) {
+        const entityId = ctx.params.id;
+        try {
+            let book = await strapi.entityService.findOne('api::book.book', entityId)
+            book = await strapi.entityService.update('api::book.book', entityId, { data: { LikeCount: (book.LikeCount || 0) + 1} })
+            ctx.body = { ok: 1, LikeCount: book.LikeCount };
+        } catch (err) {
+            ctx.body = err;
+        }
+    }
 }));
